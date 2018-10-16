@@ -8,11 +8,14 @@ set -e
 # Respect AWS_DEFAULT_OUTPUT if specified
 [ -n "$AWS_DEFAULT_OUTPUT" ] || export AWS_DEFAULT_OUTPUT=json
 
-# Capture output
-output=$( sh -c "aws $*" )
+# Execute and preserve output
+sh -c "aws $*" > "${HOME}/${GITHUB_ACTION}.${AWS_DEFAULT_OUTPUT}"
 
-# Preserve output for consumption by downstream actions
-echo "$output" > "${HOME}/${GITHUB_ACTION}.${AWS_DEFAULT_OUTPUT}"
+# Capture exit code
+status=$?
 
-# Write output to STDOUT
-echo "$output"
+# Echo the preservered output
+cat "${HOME}/${GITHUB_ACTION}.${AWS_DEFAULT_OUTPUT}"
+
+# Exit with captured exit code
+exit $status
