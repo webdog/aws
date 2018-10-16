@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Fake kubectl"
+echo "KUBE_CONFIG_DATA: $KUBE_CONFIG_DATA"
