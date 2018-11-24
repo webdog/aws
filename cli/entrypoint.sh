@@ -10,7 +10,7 @@ set -e
 
 # Capture output
 if [ "$ELASTIC_BEANSTALK = "true" ]
-then;
+then
   output=$( sh -c "eb $*")
 else
   output=$( sh -c "aws $*" )
