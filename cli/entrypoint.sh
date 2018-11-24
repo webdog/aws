@@ -9,7 +9,13 @@ set -e
 [ -n "$AWS_DEFAULT_OUTPUT" ] || export AWS_DEFAULT_OUTPUT=json
 
 # Capture output
-output=$( sh -c "aws $*" )
+if [ "$ELASTIC_BEANSTALK = "true" ]
+then;
+  output=$( sh -c eb $*)
+else
+  output=$( sh -c "aws $*" )
+fi
+
 
 # Preserve output for consumption by downstream actions
 echo "$output" > "${HOME}/${GITHUB_ACTION}.${AWS_DEFAULT_OUTPUT}"
