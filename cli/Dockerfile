@@ -26,3 +26,7 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/* && \
   pip install --upgrade pip && \
   pip install setuptools awscli awsebcli
+
+COPY "entrypoint.sh" "/entrypoint.sh"
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["help"]
