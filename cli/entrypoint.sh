@@ -9,7 +9,7 @@ set -e
 [ -n "$AWS_DEFAULT_OUTPUT" ] || export AWS_DEFAULT_OUTPUT=json
 
 # Capture output
-if [ "$ELASTIC_BEANSTALK = "true" ]
+if [ "$ELASTIC_BEANSTALK" = "true" ]
 then
   output=$( sh -c "eb $*")
 else
